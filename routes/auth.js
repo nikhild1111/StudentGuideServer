@@ -5,7 +5,7 @@
 //   signUp,
 //   login,
 // } = require("../controllers/authController");
-// const { auth ,isAdmin} = require("../middlewares/auth");
+
 
 // // Public routes (no authentication required)
 // router.post("/send-otp", sendOtp);
@@ -26,7 +26,9 @@
 // module.exports = router;
 
 
-const express = require("express")
+const express = require("express");
+const User = require("../models/User");
+const { auth ,isAdmin} = require("../middlewares/auth");
 const {
   Signup,
   Login,
@@ -40,5 +42,14 @@ router.post("/signup", Signup);
 router.post("/login", Login);
 router.post("/send-otp", sendOtp);
 router.post("/verify-otp", verifyOtp);
+router.get("/profile", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    res.status(200).json({ success: true, user });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Unable to fetch user" });
+  }
+});
+
 
 module.exports = router;

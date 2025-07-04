@@ -10,6 +10,8 @@ const mailSender = require("../utils/mailSender");
 
 exports.Signup = async (req, res) => {
   try {
+
+   
     const {
       name,
       email,
@@ -18,9 +20,12 @@ exports.Signup = async (req, res) => {
       department,
       year,
       phone,
+      gender,
       college
     } = req.body;
 
+
+    
     // 1. Check if user already exists
     const existuser = await User.findOne({ email });
     if (existuser) {
@@ -45,6 +50,7 @@ exports.Signup = async (req, res) => {
     const newUser = await User.create({
       name,
       college,
+      gender,
       email,
       password: hashedPassword,
       role,
@@ -62,7 +68,8 @@ exports.Signup = async (req, res) => {
       phone: newUser.phone,
       department:newUser.department,
       year:newUser.year,
-      college:newUser.college
+      college:newUser.college,
+        gender:newUser.gender,
     };
 
     // 5. Sign JWT token
@@ -182,6 +189,8 @@ const options = {
 
 
 exports.sendOtp = async (req, res) => {
+
+    console.log(req.body,"         the                   ");
   const { email } = req.body;
 
   try {
