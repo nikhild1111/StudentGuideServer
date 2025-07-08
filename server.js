@@ -42,8 +42,11 @@ app.use('/uploads', express.static(path.join(__dirname, 'public/uploads'))); // 
 
 
 const authRoutes = require("./routes/auth");
+const hostelRoutes = require("./routes/hostelRoutes");
+const hotel = require("./routes/hotel");
 app.use("/api/v1/auth", authRoutes);
-
+app.use("/api/hostels", hostelRoutes);
+app.use("/api/hotel", hotel);
 
 
 // this will do connection with database

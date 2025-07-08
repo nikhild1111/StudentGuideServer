@@ -1,0 +1,707 @@
+[
+  {
+    "name": "Sai Veg Mess",
+    "type": "non-veg",
+    "rating": 4.0,
+    "description": "Tasty non-veg meals with affordable pricing.",
+    "contact": "9876545858",
+    "address": {
+      "full": "Location #1, Pune",
+      "landmark": "Landmark near area #1",
+      "gully": "Gully #7",
+      "building": "Building #52"
+    },
+    "images": [
+      "public/uploads/cantine.png"
+    ],
+    "menu": [
+      {
+        "item": "Chicken Biryani",
+        "price": 130,
+        "details": "Spicy biryani with raita",
+        "type": "non-veg"
+      },
+      {
+        "item": "Egg Curry Thali",
+        "price": 90,
+        "details": "Egg curry, rice, 2 chapati",
+        "type": "non-veg"
+      }
+    ]
+  },
+  {
+    "name": "Raja Bhoj Mess",
+    "type": "both",
+    "rating": 4.2,
+    "description": "Tasty both meals with affordable pricing.",
+    "contact": "9876586795",
+    "address": {
+      "full": "Location #2, Pune",
+      "landmark": "Landmark near area #2",
+      "gully": "Gully #10",
+      "building": "Building #87"
+    },
+    "images": [
+      "public/uploads/cantine.png"
+    ],
+    "menu": [
+      {
+        "item": "Chicken Thali",
+        "price": 120,
+        "details": "Chicken curry, rice, chapati",
+        "type": "non-veg"
+      },
+      {
+        "item": "Unlimited Thali",
+        "price": 80,
+        "details": "3 bhaji, chapati, rice, dal, pickle",
+        "type": "veg"
+      }
+    ]
+  },
+  {
+    "name": "Mess #3",
+    "type": "both",
+    "rating": 3.6,
+    "description": "Affordable and hygienic both food options available.",
+    "contact": "9876538637",
+    "address": {
+      "full": "Location #3, Pune",
+      "landmark": "Landmark near area #3",
+      "gully": "Gully #8",
+      "building": "Building #13"
+    },
+    "images": [
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png"
+    ],
+    "menu": [
+      {
+        "item": "Bhindi Fry",
+        "price": 70,
+        "details": "Tasty veg dish served with salad & chutney",
+        "type": "veg"
+      },
+      {
+        "item": "Veg Kolhapuri",
+        "price": 90,
+        "details": "Tasty veg dish served with salad & chutney",
+        "type": "veg"
+      }
+    ]
+  },
+  {
+    "name": "Mess #4",
+    "type": "both",
+    "rating": 4.6,
+    "description": "Affordable and hygienic both food options available.",
+    "contact": "9876591707",
+    "address": {
+      "full": "Location #4, Pune",
+      "landmark": "Landmark near area #4",
+      "gully": "Gully #7",
+      "building": "Building #65"
+    },
+    "images": [
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png"
+    ],
+    "menu": [
+      {
+        "item": "Jeera Rice & Dal Fry",
+        "price": 85,
+        "details": "Tasty veg dish served with salad & chutney",
+        "type": "veg"
+      },
+      {
+        "item": "Chole Bhature",
+        "price": 80,
+        "details": "Tasty veg dish served with salad & chutney",
+        "type": "veg"
+      }
+    ]
+  },
+  {
+    "name": "Mess #5",
+    "type": "both",
+    "rating": 3.8,
+    "description": "Affordable and hygienic both food options available.",
+    "contact": "9876566746",
+    "address": {
+      "full": "Location #5, Pune",
+      "landmark": "Landmark near area #5",
+      "gully": "Gully #1",
+      "building": "Building #51"
+    },
+    "images": [
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png"
+    ],
+    "menu": [
+      {
+        "item": "Fish Fry Thali",
+        "price": 140,
+        "details": "Tasty non-veg dish served with salad & chutney",
+        "type": "non-veg"
+      },
+      {
+        "item": "Andhra Chicken",
+        "price": 135,
+        "details": "Tasty non-veg dish served with salad & chutney",
+        "type": "non-veg"
+      },
+      {
+        "item": "Mutton Curry",
+        "price": 150,
+        "details": "Tasty non-veg dish served with salad & chutney",
+        "type": "non-veg"
+      },
+      {
+        "item": "Chicken Masala",
+        "price": 130,
+        "details": "Tasty non-veg dish served with salad & chutney",
+        "type": "non-veg"
+      }
+    ]
+  },
+  {
+    "name": "Mess #6",
+    "type": "non-veg",
+    "rating": 4.3,
+    "description": "Affordable and hygienic non-veg food options available.",
+    "contact": "9876527301",
+    "address": {
+      "full": "Location #6, Pune",
+      "landmark": "Landmark near area #6",
+      "gully": "Gully #1",
+      "building": "Building #57"
+    },
+    "images": [
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png"
+    ],
+    "menu": [
+      {
+        "item": "Chicken Masala",
+        "price": 130,
+        "details": "Tasty non-veg dish served with salad & chutney",
+        "type": "non-veg"
+      },
+      {
+        "item": "Chicken Lollipop",
+        "price": 120,
+        "details": "Tasty non-veg dish served with salad & chutney",
+        "type": "non-veg"
+      },
+      {
+        "item": "Mutton Curry",
+        "price": 150,
+        "details": "Tasty non-veg dish served with salad & chutney",
+        "type": "non-veg"
+      }
+    ]
+  },
+  {
+    "name": "Mess #7",
+    "type": "veg",
+    "rating": 4.2,
+    "description": "Affordable and hygienic veg food options available.",
+    "contact": "9876584450",
+    "address": {
+      "full": "Location #7, Pune",
+      "landmark": "Landmark near area #7",
+      "gully": "Gully #8",
+      "building": "Building #82"
+    },
+    "images": [
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png"
+    ],
+    "menu": [
+      {
+        "item": "Andhra Chicken",
+        "price": 135,
+        "details": "Tasty non-veg dish served with salad & chutney",
+        "type": "non-veg"
+      },
+      {
+        "item": "Jeera Rice & Dal Fry",
+        "price": 85,
+        "details": "Tasty veg dish served with salad & chutney",
+        "type": "veg"
+      },
+      {
+        "item": "Matar Paneer",
+        "price": 100,
+        "details": "Tasty veg dish served with salad & chutney",
+        "type": "veg"
+      }
+    ]
+  },
+  {
+    "name": "Mess #8",
+    "type": "veg",
+    "rating": 4.0,
+    "description": "Affordable and hygienic veg food options available.",
+    "contact": "9876512371",
+    "address": {
+      "full": "Location #8, Pune",
+      "landmark": "Landmark near area #8",
+      "gully": "Gully #3",
+      "building": "Building #56"
+    },
+    "images": [
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png"
+    ],
+    "menu": [
+      {
+        "item": "Veg Kolhapuri",
+        "price": 90,
+        "details": "Tasty veg dish served with salad & chutney",
+        "type": "veg"
+      },
+      {
+        "item": "Egg Bhurji",
+        "price": 60,
+        "details": "Tasty non-veg dish served with salad & chutney",
+        "type": "non-veg"
+      },
+      {
+        "item": "Veg Pulao",
+        "price": 70,
+        "details": "Tasty veg dish served with salad & chutney",
+        "type": "veg"
+      }
+    ]
+  },
+  {
+    "name": "Mess #9",
+    "type": "non-veg",
+    "rating": 3.8,
+    "description": "Affordable and hygienic non-veg food options available.",
+    "contact": "9876531372",
+    "address": {
+      "full": "Location #9, Pune",
+      "landmark": "Landmark near area #9",
+      "gully": "Gully #8",
+      "building": "Building #71"
+    },
+    "images": [
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png"
+    ],
+    "menu": [
+      {
+        "item": "Chole Bhature",
+        "price": 80,
+        "details": "Tasty veg dish served with salad & chutney",
+        "type": "veg"
+      },
+      {
+        "item": "Chicken Lollipop",
+        "price": 120,
+        "details": "Tasty non-veg dish served with salad & chutney",
+        "type": "non-veg"
+      }
+    ]
+  },
+  {
+    "name": "Mess #10",
+    "type": "veg",
+    "rating": 3.7,
+    "description": "Affordable and hygienic veg food options available.",
+    "contact": "9876538482",
+    "address": {
+      "full": "Location #10, Pune",
+      "landmark": "Landmark near area #10",
+      "gully": "Gully #4",
+      "building": "Building #31"
+    },
+    "images": [
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png"
+    ],
+    "menu": [
+      {
+        "item": "Chole Bhature",
+        "price": 80,
+        "details": "Tasty veg dish served with salad & chutney",
+        "type": "veg"
+      },
+      {
+        "item": "Mutton Curry",
+        "price": 150,
+        "details": "Tasty non-veg dish served with salad & chutney",
+        "type": "non-veg"
+      },
+      {
+        "item": "Paneer Butter Masala Thali",
+        "price": 110,
+        "details": "Tasty veg dish served with salad & chutney",
+        "type": "veg"
+      }
+    ]
+  },
+  {
+    "name": "Mess #11",
+    "type": "non-veg",
+    "rating": 4.2,
+    "description": "Affordable and hygienic non-veg food options available.",
+    "contact": "9876578507",
+    "address": {
+      "full": "Location #11, Pune",
+      "landmark": "Landmark near area #11",
+      "gully": "Gully #9",
+      "building": "Building #68"
+    },
+    "images": [
+      "public/uploads/cantine.png"
+    ],
+    "menu": [
+      {
+        "item": "Chicken Masala",
+        "price": 130,
+        "details": "Tasty non-veg dish served with salad & chutney",
+        "type": "non-veg"
+      },
+      {
+        "item": "Veg Pulao",
+        "price": 70,
+        "details": "Tasty veg dish served with salad & chutney",
+        "type": "veg"
+      }
+    ]
+  },
+  {
+    "name": "Mess #12",
+    "type": "both",
+    "rating": 4.4,
+    "description": "Affordable and hygienic both food options available.",
+    "contact": "9876579267",
+    "address": {
+      "full": "Location #12, Pune",
+      "landmark": "Landmark near area #12",
+      "gully": "Gully #10",
+      "building": "Building #36"
+    },
+    "images": [
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png"
+    ],
+    "menu": [
+      {
+        "item": "Matar Paneer",
+        "price": 100,
+        "details": "Tasty veg dish served with salad & chutney",
+        "type": "veg"
+      },
+      {
+        "item": "Veg Kolhapuri",
+        "price": 90,
+        "details": "Tasty veg dish served with salad & chutney",
+        "type": "veg"
+      }
+    ]
+  },
+  {
+    "name": "Mess #13",
+    "type": "veg",
+    "rating": 3.9,
+    "description": "Affordable and hygienic veg food options available.",
+    "contact": "9876580478",
+    "address": {
+      "full": "Location #13, Pune",
+      "landmark": "Landmark near area #13",
+      "gully": "Gully #9",
+      "building": "Building #89"
+    },
+    "images": [
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png"
+    ],
+    "menu": [
+      {
+        "item": "Mutton Curry",
+        "price": 150,
+        "details": "Tasty non-veg dish served with salad & chutney",
+        "type": "non-veg"
+      },
+      {
+        "item": "Chicken Masala",
+        "price": 130,
+        "details": "Tasty non-veg dish served with salad & chutney",
+        "type": "non-veg"
+      },
+      {
+        "item": "Jeera Rice & Dal Fry",
+        "price": 85,
+        "details": "Tasty veg dish served with salad & chutney",
+        "type": "veg"
+      }
+    ]
+  },
+  {
+    "name": "Mess #14",
+    "type": "veg",
+    "rating": 4.5,
+    "description": "Affordable and hygienic veg food options available.",
+    "contact": "9876563891",
+    "address": {
+      "full": "Location #14, Pune",
+      "landmark": "Landmark near area #14",
+      "gully": "Gully #2",
+      "building": "Building #99"
+    },
+    "images": [
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png"
+    ],
+    "menu": [
+      {
+        "item": "Veg Pulao",
+        "price": 70,
+        "details": "Tasty veg dish served with salad & chutney",
+        "type": "veg"
+      },
+      {
+        "item": "Chole Bhature",
+        "price": 80,
+        "details": "Tasty veg dish served with salad & chutney",
+        "type": "veg"
+      }
+    ]
+  },
+  {
+    "name": "Mess #15",
+    "type": "veg",
+    "rating": 4.5,
+    "description": "Affordable and hygienic veg food options available.",
+    "contact": "9876538216",
+    "address": {
+      "full": "Location #15, Pune",
+      "landmark": "Landmark near area #15",
+      "gully": "Gully #5",
+      "building": "Building #33"
+    },
+    "images": [
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png"
+    ],
+    "menu": [
+      {
+        "item": "Mutton Curry",
+        "price": 150,
+        "details": "Tasty non-veg dish served with salad & chutney",
+        "type": "non-veg"
+      },
+      {
+        "item": "Paneer Butter Masala Thali",
+        "price": 110,
+        "details": "Tasty veg dish served with salad & chutney",
+        "type": "veg"
+      }
+    ]
+  },
+  {
+    "name": "Mess #16",
+    "type": "non-veg",
+    "rating": 4.2,
+    "description": "Affordable and hygienic non-veg food options available.",
+    "contact": "9876552013",
+    "address": {
+      "full": "Location #16, Pune",
+      "landmark": "Landmark near area #16",
+      "gully": "Gully #4",
+      "building": "Building #63"
+    },
+    "images": [
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png"
+    ],
+    "menu": [
+      {
+        "item": "Kadhi Chawal",
+        "price": 75,
+        "details": "Tasty veg dish served with salad & chutney",
+        "type": "veg"
+      },
+      {
+        "item": "Fish Fry Thali",
+        "price": 140,
+        "details": "Tasty non-veg dish served with salad & chutney",
+        "type": "non-veg"
+      },
+      {
+        "item": "Veg Pulao",
+        "price": 70,
+        "details": "Tasty veg dish served with salad & chutney",
+        "type": "veg"
+      },
+      {
+        "item": "Chicken Masala",
+        "price": 130,
+        "details": "Tasty non-veg dish served with salad & chutney",
+        "type": "non-veg"
+      }
+    ]
+  },
+  {
+    "name": "Mess #17",
+    "type": "non-veg",
+    "rating": 4.3,
+    "description": "Affordable and hygienic non-veg food options available.",
+    "contact": "9876563186",
+    "address": {
+      "full": "Location #17, Pune",
+      "landmark": "Landmark near area #17",
+      "gully": "Gully #3",
+      "building": "Building #23"
+    },
+    "images": [
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png"
+    ],
+    "menu": [
+      {
+        "item": "Jeera Rice & Dal Fry",
+        "price": 85,
+        "details": "Tasty veg dish served with salad & chutney",
+        "type": "veg"
+      },
+      {
+        "item": "Kadhi Chawal",
+        "price": 75,
+        "details": "Tasty veg dish served with salad & chutney",
+        "type": "veg"
+      }
+    ]
+  },
+  {
+    "name": "Mess #18",
+    "type": "both",
+    "rating": 4.9,
+    "description": "Affordable and hygienic both food options available.",
+    "contact": "9876552176",
+    "address": {
+      "full": "Location #18, Pune",
+      "landmark": "Landmark near area #18",
+      "gully": "Gully #3",
+      "building": "Building #24"
+    },
+    "images": [
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png"
+    ],
+    "menu": [
+      {
+        "item": "Chicken Masala",
+        "price": 130,
+        "details": "Tasty non-veg dish served with salad & chutney",
+        "type": "non-veg"
+      },
+      {
+        "item": "Chole Bhature",
+        "price": 80,
+        "details": "Tasty veg dish served with salad & chutney",
+        "type": "veg"
+      },
+      {
+        "item": "Fish Fry Thali",
+        "price": 140,
+        "details": "Tasty non-veg dish served with salad & chutney",
+        "type": "non-veg"
+      }
+    ]
+  },
+  {
+    "name": "Mess #19",
+    "type": "veg",
+    "rating": 4.4,
+    "description": "Affordable and hygienic veg food options available.",
+    "contact": "9876532967",
+    "address": {
+      "full": "Location #19, Pune",
+      "landmark": "Landmark near area #19",
+      "gully": "Gully #3",
+      "building": "Building #100"
+    },
+    "images": [
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png"
+    ],
+    "menu": [
+      {
+        "item": "Chole Bhature",
+        "price": 80,
+        "details": "Tasty veg dish served with salad & chutney",
+        "type": "veg"
+      },
+      {
+        "item": "Chicken Masala",
+        "price": 130,
+        "details": "Tasty non-veg dish served with salad & chutney",
+        "type": "non-veg"
+      }
+    ]
+  },
+  {
+    "name": "Mess #20",
+    "type": "non-veg",
+    "rating": 4.3,
+    "description": "Affordable and hygienic non-veg food options available.",
+    "contact": "9876527451",
+    "address": {
+      "full": "Location #20, Pune",
+      "landmark": "Landmark near area #20",
+      "gully": "Gully #4",
+      "building": "Building #93"
+    },
+    "images": [
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png",
+      "public/uploads/cantine.png"
+    ],
+    "menu": [
+      {
+        "item": "Chicken Masala",
+        "price": 130,
+        "details": "Tasty non-veg dish served with salad & chutney",
+        "type": "non-veg"
+      },
+      {
+        "item": "Bhindi Fry",
+        "price": 70,
+        "details": "Tasty veg dish served with salad & chutney",
+        "type": "veg"
+      }
+    ]
+  }
+]
