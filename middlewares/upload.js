@@ -59,3 +59,47 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({ storage, fileFilter });
 
 module.exports = upload;
+
+
+
+
+
+
+// const multer = require("multer");
+// const path = require("path");
+// const fs = require("fs");
+
+// // Absolute path to public/uploads folder
+// const uploadPath = path.join(__dirname, "public", "uploads");
+
+// // Create folder if it doesn't exist
+// if (!fs.existsSync(uploadPath)) {
+//   fs.mkdirSync(uploadPath, { recursive: true });
+// }
+
+// // Storage settings
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, uploadPath);
+//   },
+//   filename: (req, file, cb) => {
+//     const ext = path.extname(file.originalname);
+//     const filename = `${Date.now()}-${Math.round(Math.random() * 1e9)}${ext}`;
+//     cb(null, filename);
+//   },
+// });
+
+// // Allow only image types
+// const fileFilter = (req, file, cb) => {
+//   const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
+//   if (allowedTypes.includes(file.mimetype)) {
+//     cb(null, true);
+//   } else {
+//     cb(new Error("Only JPEG, PNG, JPG files are allowed."));
+//   }
+// };
+
+// // Export multer instance
+// const upload = multer({ storage, fileFilter });
+
+// module.exports = upload;

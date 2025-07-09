@@ -44,9 +44,12 @@ app.use('/uploads', express.static(path.join(__dirname, 'public/uploads'))); // 
 const authRoutes = require("./routes/auth");
 const hostelRoutes = require("./routes/hostelRoutes");
 const hotel = require("./routes/hotel");
+const guideRoutes = require("./routes/guideRoutes");
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/hostels", hostelRoutes);
 app.use("/api/hotel", hotel);
+app.use("/api/guide", guideRoutes); // Guide feature routes
+
 
 
 // this will do connection with database

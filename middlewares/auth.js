@@ -36,6 +36,8 @@ const token = req.cookies.token || req.header("Authorization")?.replace("Bearer 
 
 console.log("Token:", token); // Debug log
 
+
+
 if (!token) {
     return res.status(401).json({
         success: false,
@@ -72,7 +74,7 @@ next();
 exports.isAdmin=(req,res,next)=>{
     try{
         console.log(req.user);
-        if(req.user.role!=="Admin"){
+        if(req.user.role!=="admin"){
             return res.status(500).json({
                 success:false,
                 message:"token is not verify corectly ",
