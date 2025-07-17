@@ -68,31 +68,43 @@ if (
   }
 };
 
+
+
 // Multer upload instance
 const upload = multer({ storage, fileFilter });
 
 module.exports = upload;
 
-
-
-
 // const multer = require("multer");
 // const path = require("path");
 // const fs = require("fs");
 
-// // Absolute path to public/uploads folder
-// const uploadPath = path.join(__dirname, "public", "uploads");
+// // Define base uploads path
+// const baseUploadPath = path.join(__dirname, "../public/uploads");
 
-// // Create folder if it doesn't exist
-// if (!fs.existsSync(uploadPath)) {
-//   fs.mkdirSync(uploadPath, { recursive: true });
-// }
-
-// // Storage settings
+// // Multer storage configuration
 // const storage = multer.diskStorage({
 //   destination: (req, file, cb) => {
-//     cb(null, uploadPath);
+//     let subfolder = "others";
+
+//     if (["image", "images"].includes(file.fieldname)) {
+//       subfolder = "images";
+//     } else if (file.fieldname === "resume") {
+//       subfolder = "resumes";
+//     } else if (file.fieldname === "menu") {
+//       subfolder = "menus";
+//     }
+
+//     const finalPath = path.join(baseUploadPath, subfolder);
+
+//     // Create the folder if it doesn't exist
+//     if (!fs.existsSync(finalPath)) {
+//       fs.mkdirSync(finalPath, { recursive: true });
+//     }
+
+//     cb(null, finalPath);
 //   },
+
 //   filename: (req, file, cb) => {
 //     const ext = path.extname(file.originalname);
 //     const filename = `${Date.now()}-${Math.round(Math.random() * 1e9)}${ext}`;
@@ -100,17 +112,47 @@ module.exports = upload;
 //   },
 // });
 
-// // Allow only image types
+// // File filter to allow images and PDFs
 // const fileFilter = (req, file, cb) => {
-//   const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
-//   if (allowedTypes.includes(file.mimetype)) {
+//   const imageTypes = ["image/jpeg", "image/png", "image/jpg", "image/webp"];
+//   const resumeTypes = ["application/pdf"];
+
+//   if (
+//     (["image", "images"].includes(file.fieldname) && imageTypes.includes(file.mimetype)) ||
+//     (file.fieldname === "resume" && resumeTypes.includes(file.mimetype))
+//   ) {
 //     cb(null, true);
 //   } else {
-//     cb(new Error("Only JPEG, PNG, JPG files are allowed."));
+//     cb(
+//       new Error("Only JPEG, PNG, JPG allowed for images and PDF allowed for resume")
+//     );
 //   }
 // };
 
-// // Export multer instance
 // const upload = multer({ storage, fileFilter });
 
 // module.exports = upload;
+
+
+
+
+
+
+// router.post('/submit-resume', upload.single('resume'), async (req, res) => {
+//   const resumePath = `/uploads/resumes/${req.file.filename}`;
+//   // Save path to DB if needed
+//   res.status(200).json({ success: true, path: resumePath });
+// });
+
+
+
+
+
+
+// /public/uploads/
+// ├── images/
+// │   └── photo1.jpg
+// ├── resumes/
+// │   └── resume1.pdf
+// └── menus/
+//     └── menu1.png
