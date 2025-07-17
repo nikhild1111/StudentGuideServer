@@ -3,8 +3,8 @@ const router = express.Router();
 const mentorController = require("../controllers/mentorController");
 const { auth ,isAdmin} = require("../middlewares/auth");
 const upload = require("../middlewares/upload"); 
-router.post("/all",auth , mentorController.getMentors);
-router.post("/add", auth, upload.fields([
+router.post("/all", mentorController.getMentors);
+router.post("/add", upload.fields([
     { name: "image", maxCount: 1 },
     { name: "resume", maxCount: 1 }
   ]),

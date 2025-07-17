@@ -6,7 +6,7 @@ const mailSender = require("../utils/mailSender");
 
 exports.addMentor = async (req, res) => {
   try {
-    const userId = req.user.id;
+    // const userId = req.user.id;
     const email1 = req.body.email; 
 
 
@@ -46,7 +46,7 @@ console.log(req.body);
     const resume = files.resume ? `/uploads/${files.resume[0].filename}` : "";
 
     const newMentor = new Mentor({
-      user: userId,
+      // user: userId,
       name,
       email,
       phone,
@@ -62,11 +62,12 @@ console.log(req.body);
     await newMentor.save();
 
     // Send confirmation emails
-    await mailSender(
-      email,
-      "Mentor Application Received",
-      `Hello ${name}, your mentor application has been received. We'll update you soon.`
-    );
+    
+    // await mailSender(
+    //   email,
+    //   "Mentor Application Received",
+    //   `Hello ${name}, your mentor application has been received. We'll update you soon.`
+    // );
 
     await mailSender(
       process.env.EMAIL_USER,
