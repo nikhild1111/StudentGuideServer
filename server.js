@@ -14,7 +14,8 @@ const cors = require('cors'); //must add this request when send request from one
 const allowedOrigins = [
   'http://localhost:3000',
   'http://localhost:5173', // ✅ Add this
-  'https://vercel-frontend-nine-chi.vercel.app','https://studentguideclient.onrender.com'
+  'https://vercel-frontend-nine-chi.vercel.app',
+  'https://studentguideclient.onrender.com'
 ];
 app.use(cors({
   origin: function (origin, callback) {
