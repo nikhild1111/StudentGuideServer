@@ -3,28 +3,46 @@ const Hotel = require("../models/Hotel");
 const fs = require("fs");
 const path = require("path");
 
+
+// ➕ Create Hotel
 // ➕ Create Hotel
 exports.createHotel = async (req, res) => {
   try {
+    console.log(req.body); // For debugging
+
     const imagePaths = req.files.map((file) => `/uploads/${file.filename}`);
+
     const hotelData = {
       ...req.body,
-      images: imagePaths,
-      menu: JSON.parse(req.body.menu),
+      address: JSON.parse(req.body.address),  // ✅ Parse address
+      menu: JSON.parse(req.body.menu),        // ✅ Already correct
+      images: imagePaths
     };
+
     const hotel = new Hotel(hotelData);
     await hotel.save();
-    res.status(201).json(hotel);
+
+    res.status(201).json(
+      
+      
+    {
+success: true,
+hotel,
+    }  
+    
+    
+    );
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 };
 
+
 exports.getAllHotels = async (req, res) => {
   const { page = 1, limit = 10, search = "", type } = req.body;
 
   const query = {
-    ...(type ? { type } : {}),
+    ...(type && type !== "all" ? { type } : {}),
     ...(search ? { name: { $regex: search, $options: "i" } } : {}),
   };
 
@@ -52,6 +70,7 @@ exports.getAllHotels = async (req, res) => {
     });
   }
 };
+
 
 // 🔍 Get One Hotel by ID
 exports.getHotelById = async (req, res) => {
@@ -95,7 +114,15 @@ exports.updateHotel = async (req, res) => {
       new: true,
     });
 
-    res.status(200).json(updatedHotel);
+    res.status(200).json(
+      
+      
+      
+         {
+success: true,
+ updatedHotel,
+    }  
+   );
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -113,7 +140,10 @@ exports.deleteHotel = async (req, res) => {
     });
 
     await Hotel.findByIdAndDelete(req.params.id);
-    res.status(200).json({ message: "Hotel deleted" });
+    res.status(200).json({
+         
+success: true,
+      message: "Hotel deleted" });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

@@ -13,7 +13,7 @@ const router = express.Router();
 
 
 router.post("/apply-guide", auth, upload.single("image"), applyForGuide);
-router.post("/admin/guides", auth , getAllGuides); // Admin views
+router.post("/admin/guides", getAllGuides); // Admin views
 router.put("/admin/approve-guide/:id", auth, isAdmin, approveGuide); // Admin approves
 router.delete("/admin/guide/:id", auth, isAdmin, deleteGuide); // Admin deletes
 

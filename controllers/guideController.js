@@ -43,11 +43,13 @@ exports.applyForGuide = async (req, res) => {
     });
 
     // Send emails...
-    await mailSender(
-      email,
-      "Guide Application Received",
-      `Hello ${name}, your guide application has been received. We'll update you soon.`
-    );
+
+    
+    // await mailSender(
+    //   email,
+    //   "Guide Application Received",
+    //   `Hello ${name}, your guide application has been received. We'll update you soon.`
+    // );
 
     await mailSender(
       process.env.EMAIL_USER,
@@ -155,11 +157,29 @@ exports.approveGuide = async (req, res) => {
     guide.role = "Guide";
     await guide.save();
 
-    await mailSender(
-      guide.email,
-      "You are now a Guide!",
-      `Congrats ${guide.name}, your guide request has been approved.`
+    // await mailSender(
+    //   guide.email,
+    //   "You are now a Guide!",
+    //   `Congrats ${guide.name}, your guide request has been approved.`
+    // );
+  await mailSender(
+      process.env.EMAIL_USER,
+      `
+        New guide application  approved:
+
+        📌 Name: ${name}
+        📧 Email: ${email}
+        📱 Phone: ${phone}
+        🏫 Department: ${department}
+        🎓 Year: ${year}
+        🌍 Location: ${taluka}, ${city}, ${state}, ${country}
+        🆔 Application ID: ${newGuide._id}
+
+        Please review this approved in the Admin Panel.
+      `
     );
+
+
 
     res.status(200).json({ success: true, message: "Guide approved." });
   } catch (error) {

@@ -14,8 +14,8 @@ const cors = require('cors'); //must add this request when send request from one
 const allowedOrigins = [
   'http://localhost:3000',
   'http://localhost:5173', // ✅ Add this
-  'https://vercel-frontend-nine-chi.vercel.app',
-  'https://studentguideclient.onrender.com'
+  'https://vercel-frontend-nine-chi.vercel.app', 
+'https://studentguideclient.onrender.com'
 ];
 app.use(cors({
   origin: function (origin, callback) {
@@ -46,11 +46,12 @@ const authRoutes = require("./routes/auth");
 const hostelRoutes = require("./routes/hostelRoutes");
 const hotel = require("./routes/hotel");
 const guideRoutes = require("./routes/guideRoutes");
+const mentorRoutes = require("./routes/mentorRoutes");
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/hostels", hostelRoutes);
 app.use("/api/hotel", hotel);
 app.use("/api/guide", guideRoutes); // Guide feature routes
-
+app.use("/api/mentors", mentorRoutes);
 
 
 // this will do connection with database

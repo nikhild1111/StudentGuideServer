@@ -12,7 +12,7 @@ const guideSchema = new mongoose.Schema({
   country: { type: String, default: "India" },
   taluka: { type: String },
   gender: { type: String },
-  role: { type: String, enum: ["Student", "Guide"], default: "Student" },
+  role: { type: String, enum: ["Student", "Guide"], default: "Guide" },
   pay: { type: Number, default: 1000 },
 }, { timestamps: true });
 

@@ -1,30 +1,3 @@
-// const express = require("express");
-// const router = express.Router();
-// const {
-//    sendOtp, verifyOtp,
-//   signUp,
-//   login,
-// } = require("../controllers/authController");
-
-
-// // Public routes (no authentication required)
-// router.post("/send-otp", sendOtp);
-// router.post("/verify-otp", verifyOtp);
-// router.post("/signup",auth, signUp);
-// router.post("/login",auth, login);
-
-
-// // Protected routes (authentication required)
-// // router.get("/profile", auth, getProfile);
-// // router.put("/profile", auth, updateProfile);
-// // router.post("/change-password", auth, changePassword);
-// // router.post("/logout", auth, logout);
-
-// // Admin-only routes
-// // router.get("/users", auth, authorize("admin"), getAllUsers);
-
-// module.exports = router;
-
 
 const express = require("express");
 const User = require("../models/User");
@@ -39,6 +12,14 @@ const {
 const router = express.Router();
 
 router.post("/signup", Signup);
+// In authRoutes.js
+router.get("/role", auth,isAdmin, (req, res) => {
+  res.status(200).json({
+    success: true,
+    user: req.user,
+  });
+});
+
 router.post("/login", Login);
 router.post("/send-otp", sendOtp);
 router.post("/verify-otp", verifyOtp);
