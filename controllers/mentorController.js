@@ -221,15 +221,36 @@ exports.deleteMentor = async (req, res) => {
 
 exports.searchMentors = async (req, res) => {
   try {
-    const { name, department, company, year,domain, page = 1, limit = 6 } = req.query;
+    const {
+      keyword,
+      department,
+      company,
+      year,
+      domain,
+      page = 1,
+      limit = 6,
+    } = req.body;
+
     const query = {};
-    if (name) query.name = new RegExp(name, "i");
+
+    if (keyword) {
+      const regex = new RegExp(keyword, "i");
+      query.$or = [
+        { name: regex },
+        { department: regex },
+        { companies: regex },
+        { domain: regex },
+        { email: regex }
+      ];
+    }
+
     if (department) query.department = department;
     if (company) query.companies = company;
-    if (company) query.domain = domain;
+    if (domain) query.domain = domain;
     if (year) query.passoutYear = parseInt(year);
 
     const total = await Mentor.countDocuments(query);
+
     const mentors = await Mentor.find(query)
       .skip((page - 1) * limit)
       .limit(parseInt(limit));
@@ -244,9 +265,14 @@ exports.searchMentors = async (req, res) => {
       },
     });
   } catch (err) {
-    res.status(500).json({ success: false, message: "Search failed", error: err.message });
+    res.status(500).json({
+      success: false,
+      message: "Search failed",
+      error: err.message,
+    });
   }
 };
+
 
 exports.sortMentors = async (req, res) => {
   try {

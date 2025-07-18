@@ -12,7 +12,7 @@ router.post("/add", upload.fields([
   mentorController.addMentor);
 router.put("/update/:id", auth, mentorController.updateMentor);
 router.delete("/delete/:id", auth, mentorController.deleteMentor);
-router.get("/search", mentorController.searchMentors);
+router.post("/search", mentorController.searchMentors);
 router.get("/sort", mentorController.sortMentors);
 
 module.exports = router;
