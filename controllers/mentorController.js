@@ -13,7 +13,7 @@ exports.addMentor = async (req, res) => {
 console.log(req.body);
 
    const count = await Mentor.countDocuments({ email: req.body.email });
-    if (count >1 ) {
+    if (count >0 ) {
       return res.status(400).json({ success: false, message: "You are already mentors." });
     }
 
