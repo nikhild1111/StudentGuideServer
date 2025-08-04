@@ -23,7 +23,7 @@ exports.auth=async(req,res,next)=>{
     const token1 = req.cookies.token;
 
 
-    console.log("Token from cookie:", token1);  // Debug log
+    console.log("Token from cookie:", req.body);  // Debug log
 // if(!token ||token==undefined){
 //     return res.status(401).json({
 //         success:false,
@@ -50,10 +50,11 @@ if (!token) {
 try{
     // whtever the data whcih we store int he token we can get it using the verify method fr taht use secret key
     const decode=jwt.verify(token,"LASTCHANSE");
-  
+
 
     // we are addding the decoded data in the user so we can chake the role
 req.user=decode;
+  console.log("Decoded user:", JSON.stringify(req.user, null, 2));
 }
 catch(err){
     return res.status(500).json({
