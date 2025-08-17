@@ -1,77 +1,113 @@
-// when you will done the primum task then do this and change the role based on that 
-// first user will click on the primum button 
-// then cjeck for primimum by middlwer and token if not then send messhage take primum and pop it 
-// then difind the take primum route and pyment way
-// 
+// // when you will done the primum task then do this and change the role based on that 
+// // first user will click on the primum button 
+// // then cjeck for primimum by middlwer and token if not then send messhage take primum and pop it 
+// // then difind the take primum route and pyment way
+// // 
 
-const jwt= require("jsonwebtoken");
-require("dotenv").config();
-
-
-// dont use two time 
-// const cookieParser = require("cookie-parser");
-// app.use(cookieParser()); // this line is required to access req.cookies
-
-exports.auth=async(req,res,next)=>{
-
-    try{
-        // first extract the jwt token
-        // we can get token from heder,cokkis,body if we inserted between them
-    // console.log(req.cookies.token);
+// const jwt= require("jsonwebtoken");
+// require("dotenv").config();
 
 
-    const token1 = req.cookies.token;
+// // dont use two time 
+// // const cookieParser = require("cookie-parser");
+// // app.use(cookieParser()); // this line is required to access req.cookies
+
+// exports.auth=async(req,res,next)=>{
+
+//     try{
+//         // first extract the jwt token
+//         // we can get token from heder,cokkis,body if we inserted between them
+//     // console.log(req.cookies.token);
 
 
-    console.log("Token from cookie:", req.body);  // Debug log
-// if(!token ||token==undefined){
+//     const token1 = req.cookies.token;
+
+
+//     console.log("Token from cookie:", req.body);  // Debug log
+// // if(!token ||token==undefined){
+// //     return res.status(401).json({
+// //         success:false,
+// //         message:"Token missing ",
+// //     })
+// // }
+
+// // Try to get token from cookies or Authorization header
+// const token = req.cookies.token || req.header("Authorization")?.replace("Bearer ", "");
+
+// console.log("Token:", token); // Debug log
+
+
+
+// if (!token) {
 //     return res.status(401).json({
+//         success: false,
+//         message: "Token missing",
+//     });
+// }
+
+// // verify the token
+
+// try{
+//     // whtever the data whcih we store int he token we can get it using the verify method fr taht use secret key
+//     const decode=jwt.verify(token,"LASTCHANSE");
+
+
+//     // we are addding the decoded data in the user so we can chake the role
+// req.user=decode;
+//   console.log("Decoded user:", JSON.stringify(req.user, null, 2));
+// }
+// catch(err){
+//     return res.status(500).json({
 //         success:false,
-//         message:"Token missing ",
+//         message:"token not valid",
+//     })
+// }
+// next();
+
+// }catch(error){
+//     return res.status(500).json({
+//         success:false,
+//         message:"user cannot be registred internal server problem ",
 //     })
 // }
 
-// Try to get token from cookies or Authorization header
-const token = req.cookies.token || req.header("Authorization")?.replace("Bearer ", "");
+// }
 
-console.log("Token:", token); // Debug log
+const jwt = require("jsonwebtoken");
+
+exports.auth = (req, res, next) => {
+  let token = null;
+
+  // From cookie
+  if (req.cookies && req.cookies.token) {
+    token = req.cookies.token;
+  }
+
+  // From header
+  if (!token && req.headers.authorization && req.headers.authorization.startsWith("Bearer ")) {
+    token = req.headers.authorization.split(" ")[1];
+  }
+
+  if (!token) {
+    return res.status(401).json({ success: false, message: "No token provided" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, "LASTCHANSE"); // Same secret as signup/login
+    req.user = decoded;
+    next();
+  } catch (err) {
+    return res.status(401).json({ success: false, message: "Invalid or expired token" });
+  }
+};
 
 
 
-if (!token) {
-    return res.status(401).json({
-        success: false,
-        message: "Token missing",
-    });
-}
-
-// verify the token
-
-try{
-    // whtever the data whcih we store int he token we can get it using the verify method fr taht use secret key
-    const decode=jwt.verify(token,"LASTCHANSE");
 
 
-    // we are addding the decoded data in the user so we can chake the role
-req.user=decode;
-  console.log("Decoded user:", JSON.stringify(req.user, null, 2));
-}
-catch(err){
-    return res.status(500).json({
-        success:false,
-        message:"token not valid",
-    })
-}
-next();
 
-}catch(error){
-    return res.status(500).json({
-        success:false,
-        message:"user cannot be registred internal server problem ",
-    })
-}
 
-}
+
 exports.isAdmin=(req,res,next)=>{
     try{
         console.log(req.user);

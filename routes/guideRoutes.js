@@ -24,6 +24,7 @@
 
 const express = require("express");
 const { auth, isAdmin } = require("../middlewares/auth");
+// here we use the cloudnary
 const guideUpload = require("../middlewares/guideUpload");
 const {
   applyForGuide,

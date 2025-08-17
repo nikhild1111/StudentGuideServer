@@ -10,8 +10,6 @@ const mailSender = require("../utils/mailSender");
 
 exports.Signup = async (req, res) => {
   try {
-
-   
     const {
       name,
       email,
@@ -57,6 +55,9 @@ exports.Signup = async (req, res) => {
       department: role === "student" ? department : undefined,
       year: role === "student" ? year : undefined,
       phone,
+    isLogin :true,
+  loginExpiry : Date.now() + 2 * 60 * 60 * 1000, // 2 hours
+
     });
 
     // 4. Create payload for JWT
@@ -134,6 +135,21 @@ try{
           message: "Invalid password",
         });
       }
+if (user.isLogin && user.loginExpiry < Date.now()) {
+  user.isLogin = false;
+  await user.save();
+}
+
+
+
+if (user.isLogin && user.loginExpiry > Date.now()) {
+  return res.status(400).json({
+    success: false,
+    message: "Already logged in on another device",
+  });
+}
+
+
 // as we want to create the token first difnd the payload (data) whcih we want in that token
     const payload = {
       id: user._id,
@@ -164,6 +180,12 @@ const options = {
     sameSite: 'None',  // ✅ Allow cross-origin (Vercel <-> Render)
     secure: true       // ✅ Required in production with HTTPS
   };
+
+
+
+    user.isLogin = true;
+  user.loginExpiry = Date.now() + 2 * 60 * 60 * 1000; // 2 hours
+  await user.save();
   
   res.cookie("token", token, options).status(200).json({
     success: true,
@@ -183,7 +205,44 @@ const options = {
 }
 }
 
+exports.logout=async(req,res)=>{
 
+  let userid=req.user.id;
+  console.log("     ddddddddddd ",req.user);
+
+  try{
+
+//     await User.findOneAndUpdate(
+//   { _id: userId },           // filter
+//   { isLogin: false },        // update
+//   { new: true }              // return updated doc (optional)
+// );
+
+
+// or 
+
+
+  await User.findOneAndUpdate({_id:userid},{$set: { isLogin: false, loginExpiry: null }},{new :true});
+  res.status(200).json({
+    success:true,
+    message:"Logout is done Successfuly",
+  })
+
+      // Optional: clear cookie
+    res.clearCookie("token", {
+      httpOnly: true,
+      sameSite: "None",
+      secure: true,
+    });
+
+    
+  }catch(err){
+    return res.status(500).json({
+      success:false,
+      message:"Server error during logout"
+    })
+  }
+}
 
 
 

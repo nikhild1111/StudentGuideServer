@@ -635,7 +635,7 @@ exports.searchMentors = async (req, res) => {
   try {
     const { keyword = "", department, company, year, domain, page = 1, limit = 6 } = req.body;
     const query = {};
-
+console.log(req.body);
     if (keyword) {
       const regex = new RegExp(keyword, "i");
       query.$or = [
@@ -646,17 +646,18 @@ exports.searchMentors = async (req, res) => {
         { companies: regex },
       ];
     }
-    if (department) query.department = department;
-    if (company) query.companies = company;
-    if (domain) query.domain = domain;
-    if (year) query.passoutYear = parseInt(year);
+ if (department) query.department = new RegExp(`^${department}$`, "i");
+if (company) query.companies = new RegExp(company, "i");
+if (domain) query.domain = new RegExp(domain, "i");
+if (year) query.passoutYear = parseInt(year);
+
 
     const total = await Mentor.countDocuments(query);
     const mentors = await Mentor.find(query)
       .skip((page - 1) * limit)
       .limit(parseInt(limit))
       .sort({ createdAt: -1 });
-
+console.log(mentors,"   dd  ",query)
     res.status(200).json({
       success: true,
       data: mentors,

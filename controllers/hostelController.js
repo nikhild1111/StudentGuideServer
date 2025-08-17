@@ -5,38 +5,44 @@ const path = require("path");
 // 🔸 Create Hostel
 exports.createHostel = async (req, res) => {
   try {
-    const {
-      name,
-      type,
-      rent,
-      rating,
-      video,
-      services,
-      address,
-      contact,
-      description,
-    } = req.body;
+    const data = {};
 
-    const imagePaths = req.files.map((file) => `/uploads/${file.filename}`);
+    if (req.body.name) data.name = req.body.name;
+    if (req.body.type) data.type = req.body.type;
+    if (req.body.rent) data.rent = req.body.rent;
+    if (req.body.rating) data.rating = req.body.rating;
+    if (req.body.video) data.video = req.body.video;
+    if (req.body.contact) data.contact = req.body.contact;
+    if (req.body.description) data.description = req.body.description;
 
-    // ✅ Parse JSON string fields
-    const parsedAddress = typeof address === 'string' ? JSON.parse(address) : address;
-    const parsedServices = typeof services === 'string' ? JSON.parse(services) : services;
+    // ✅ Handle images
+    if (req.files && req.files.length > 0) {
+      data.images = req.files.map((file) => `/uploads/${file.filename}`);
+    }
 
-    const hostel = await Hostel.create({
-      name,
-      type,
-      rent,
-      rating,
-      images: imagePaths,
-      video,
-      services: parsedServices,
-      address: parsedAddress,
-      contact,
-      description,
+    // ✅ Handle services (JSON string or array)
+    if (req.body.services) {
+      data.services =
+        typeof req.body.services === "string"
+          ? JSON.parse(req.body.services)
+          : req.body.services;
+    }
+
+    // ✅ Handle address (JSON string or object)
+    if (req.body.address) {
+      data.address =
+        typeof req.body.address === "string"
+          ? JSON.parse(req.body.address)
+          : req.body.address;
+    }
+
+    const hostel = await Hostel.create(data);
+
+    res.status(201).json({
+      success: true,
+      message: "Hostel added",
+      data: hostel,
     });
-
-    res.status(201).json({ success: true, message: "Hostel added", data: hostel });
   } catch (err) {
     res.status(500).json({
       success: false,
@@ -50,41 +56,50 @@ exports.createHostel = async (req, res) => {
 exports.updateHostel = async (req, res) => {
   try {
     const { id } = req.params;
-
     const existing = await Hostel.findById(id);
-    if (!existing) return res.status(404).json({ success: false, message: "Hostel not found" });
-
-    // Delete old images if new ones are uploaded
-    if (req.files.length > 0 && existing.images.length > 0) {
-      existing.images.forEach((imgPath) => {
-        const fullPath = path.join(__dirname, "..", "public", imgPath);
-        if (fs.existsSync(fullPath)) fs.unlinkSync(fullPath);
-      });
+    if (!existing) {
+      return res.status(404).json({ success: false, message: "Hostel not found" });
     }
+
+    // ✅ Safely check req.files
+    let newImages = existing.images;
+    if (req.files && req.files.length > 0) {
+      // delete old images
+      if (existing.images.length > 0) {
+        existing.images.forEach((imgPath) => {
+          const fullPath = path.join(__dirname, "..", "public", imgPath);
+          if (fs.existsSync(fullPath)) fs.unlinkSync(fullPath);
+        });
+      }
+      newImages = req.files.map((file) => `/uploads/${file.filename}`);
+    }
+
+    // ✅ Safe JSON parse
+    const parseIfNeeded = (field, fallback) => {
+      if (!field) return fallback;
+      try {
+        return typeof field === "string" ? JSON.parse(field) : field;
+      } catch {
+        return fallback;
+      }
+    };
 
     const updatedFields = {
       ...req.body,
-      images: req.files.length > 0
-        ? req.files.map((file) => `/uploads/${file.filename}`)
-        : existing.images,
-
-      // ✅ Parse JSON string if present
-      address: req.body.address
-        ? JSON.parse(req.body.address)
-        : existing.address,
-
-      services: req.body.services
-        ? JSON.parse(req.body.services)
-        : existing.services,
+      images: newImages,
+      address: parseIfNeeded(req.body.address, existing.address),
+      services: parseIfNeeded(req.body.services, existing.services),
     };
 
     const updated = await Hostel.findByIdAndUpdate(id, updatedFields, { new: true });
 
     res.status(200).json({ success: true, message: "Hostel updated", data: updated });
   } catch (err) {
+    console.error("Update hostel error:", err);
     res.status(500).json({ success: false, message: "Update failed", error: err.message });
   }
 };
+
 
 // 🔸 Delete Hostel
 exports.deleteHostel = async (req, res) => {
@@ -119,7 +134,7 @@ exports.getHostels = async (req, res) => {
       ];
     }
 
-    if (type !== "all") query.type = type;
+    if (type === "boys" ||type === "girls") query.type = type;
 
     const total = await Hostel.countDocuments(query);
     const hostels = await Hostel.find(query)
@@ -140,3 +155,53 @@ exports.getHostels = async (req, res) => {
     res.status(500).json({ success: false, message: "Failed to fetch hostels", error: err.message });
   }
 };
+
+// // Example backend controller
+// exports.getHostels = async (req, res) => {
+//   try {
+//     const { page = 1, limit = 10, search = "", type, minRent, maxRent, services } = req.query;
+
+//     const query = {};
+
+//     // Search (name or address)
+//     if (search) {
+//       query.$or = [
+//         { name: { $regex: search, $options: "i" } },
+//         { "address.full": { $regex: search, $options: "i" } }
+//       ];
+//     }
+
+//     // Gender/Type filter
+//     if (type && type !== "all") {
+//       query.type = type;
+//     }
+
+//     // Rent filter
+//     if (minRent || maxRent) {
+//       query.rent = {};
+//       if (minRent) query.rent.$gte = Number(minRent);
+//       if (maxRent) query.rent.$lte = Number(maxRent);
+//     }
+
+//     // Services filter (must include all chosen services)
+//     if (services && services.length > 0) {
+//       query.services = { $all: services };
+//     }
+
+//     const hostels = await Hostel.find(query)
+//       .skip((page - 1) * limit)
+//       .limit(Number(limit));
+
+//     const total = await Hostel.countDocuments(query);
+
+//     res.json({
+//       data: hostels,
+//       pagination: {
+//         total,
+//         totalPages: Math.ceil(total / limit),
+//       },
+//     });
+//   } catch (error) {
+//     res.status(500).json({ message: "Error fetching hostels", error });
+//   }
+// };

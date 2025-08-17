@@ -1,8 +1,11 @@
 const express = require("express");
+
+
+// here we use the cloudnary
 const router = express.Router();
 const mentorController = require("../controllers/mentorController");
 const { auth ,isAdmin} = require("../middlewares/auth");
-const upload = require("../middlewares/cloudinaryUpload");
+const upload = require("../middlewares/mentorUploads");
 router.post("/all", mentorController.getMentors);
 
 router.post(
