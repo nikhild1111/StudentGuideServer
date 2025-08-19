@@ -45,7 +45,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'public/uploads'))); // 
 
 const authRoutes = require("./routes/auth");
 const hostelRoutes = require("./routes/hostelRoutes");
-const hotel = require("./routes/hotel");
+const hotel = require("./routes/hotelRoutes");
 const guideRoutes = require("./routes/guideRoutes");
 const mentorRoutes = require("./routes/mentorRoutes");
 const booksRoutes=require("./routes/booksRoutes")

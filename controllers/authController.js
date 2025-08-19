@@ -74,7 +74,7 @@ exports.Signup = async (req, res) => {
     };
 
     // 5. Sign JWT token
-    const token = jwt.sign(payload, "LASTCHANSE", { expiresIn: "2h" });
+const token = jwt.sign(payload, "LASTCHANSE", { expiresIn: "2d" });
     payload.token = token;
 
     // 6. Cookie options
@@ -163,9 +163,7 @@ if (user.isLogin && user.loginExpiry > Date.now()) {
     };
 
 // LASTCHANSE its a secret key as our process.env is not working
-let token=jwt.sign(payload,"LASTCHANSE",{
-    expiresIn:"2h",
-})
+const token = jwt.sign(payload, "LASTCHANSE", { expiresIn: "2d" });
 
 // imp you can send the toekn in the header or in the response body or in the cookis
 

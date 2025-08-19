@@ -3,8 +3,6 @@ const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const cloudinary = require("../utils/cloudinary");
 const { rawListeners } = require("../models/Mentor");
 
-
-
 const storage = new CloudinaryStorage({
  
   cloudinary: cloudinary,
