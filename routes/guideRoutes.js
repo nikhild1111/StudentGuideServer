@@ -33,7 +33,7 @@ const {
   deleteGuide,
   updateGuide,
 } = require("../controllers/guideController");
-
+const checkOwnership =require('../middlewares/checkOwnership')
 const router = express.Router();
 
 // Apply for guide
@@ -46,10 +46,16 @@ router.post("/admin/guides", auth,  getAllGuides);
 router.put("/admin/approve-guide/:id", auth, isAdmin, approveGuide);
 
 // Admin: Update guide (fields + optional image)
-router.put("/admin/guide/:id", auth, isAdmin, guideUpload.single("image"), updateGuide);
+router.put(
+  "/admin/guide/:id",
+  auth,
+  checkOwnership("guide"),
+  guideUpload.single("image"),
+  updateGuide
+);
 
-// Admin: Delete guide
-router.delete("/admin/guide/:id", auth, isAdmin, deleteGuide);
+// Admin or Owner: Delete guide
+router.delete("/guide/:id", auth, checkOwnership("guide"), deleteGuide);
 
 module.exports = router;
 

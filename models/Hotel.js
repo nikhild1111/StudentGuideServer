@@ -43,7 +43,8 @@ const hotelSchema = new mongoose.Schema(
     },
     images: [
       {
-        type: String,
+        url: { type: String, required: true },       // Cloudinary URL
+        public_id: { type: String, required: true }, // Cloudinary public_id
       },
     ],
     menu: [

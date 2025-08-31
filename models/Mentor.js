@@ -22,8 +22,6 @@
 
 
 
-
-
 const mongoose = require("mongoose");
 
 const mentorSchema = new mongoose.Schema(
@@ -44,9 +42,14 @@ const mentorSchema = new mongoose.Schema(
       default: "0000000000",
     },
     image: {
-      type: String,
-      default:
-        "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png",
+      url: {
+        type: String,
+        default: "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png",
+      },
+      public_id: {
+        type: String,
+        default: "",
+      },
     },
     department: {
       type: String,
@@ -66,14 +69,29 @@ const mentorSchema = new mongoose.Schema(
       enum: ["Male", "Female", "Other", "Prefer not to say"],
       default: "Prefer not to say",
     },
-    domain:{
-      type:String,
-      default:"none"
-    },resume:{
+    domain: {
+      type: String,
+      default: "none",
+    },
+    resume: {
+      url: {
         type: String,
-      default:
-        "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png",
-    }
+        default: "",
+      },
+      public_id: {
+        type: String,
+        default: "",
+      },
+    },
+    role: {
+      type: String,
+      enum: ["student", "mentor", "admin"],
+      default: "mentor",
+    },
+    isApproved: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,
@@ -81,5 +99,4 @@ const mentorSchema = new mongoose.Schema(
 );
 
 const Mentor = mongoose.model("Mentor", mentorSchema);
-
 module.exports = Mentor;

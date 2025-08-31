@@ -155,7 +155,6 @@
 
 
 
-
 // controllers/hotelController.js
 const Hotel = require("../models/Hotel");
 const cloudinary = require("../utils/cloudinary");
@@ -181,8 +180,10 @@ exports.createHotel = async (req, res) => {
 
     // ✅ Handle Cloudinary images
     if (req.files && req.files.length > 0) {
-      data.images = req.files.map((file) => file.path); // Cloudinary URL
-      data.imagePublicIds = req.files.map((file) => file.filename); // Cloudinary public_id
+      data.images = req.files.map((file) => ({
+        url: file.path,
+        public_id: file.filename,
+      }));
     }
 
     const hotel = await Hotel.create(data);
@@ -265,20 +266,21 @@ exports.updateHotel = async (req, res) => {
       return res.status(404).json({ success: false, message: "Hotel not found" });
 
     let newImages = existing.images;
-    let newPublicIds = existing.imagePublicIds || [];
 
     // ✅ If new images are uploaded
     if (req.files && req.files.length > 0) {
       // ❌ Delete old Cloudinary images
-      if (newPublicIds.length > 0) {
-        for (let pid of newPublicIds) {
-          await cloudinary.uploader.destroy(pid).catch(() => {});
+      if (existing.images && existing.images.length > 0) {
+        for (let img of existing.images) {
+          await cloudinary.uploader.destroy(img.public_id).catch(() => {});
         }
       }
 
       // ✅ Save new Cloudinary images
-      newImages = req.files.map((file) => file.path);
-      newPublicIds = req.files.map((file) => file.filename);
+      newImages = req.files.map((file) => ({
+        url: file.path,
+        public_id: file.filename,
+      }));
     }
 
     // ✅ Parse JSON safely
@@ -294,7 +296,6 @@ exports.updateHotel = async (req, res) => {
     const updatedFields = {
       ...req.body,
       images: newImages,
-      imagePublicIds: newPublicIds,
       address: parseIfNeeded(req.body.address, existing.address),
       menu: parseIfNeeded(req.body.menu, existing.menu),
     };
@@ -327,9 +328,9 @@ exports.deleteHotel = async (req, res) => {
       return res.status(404).json({ success: false, message: "Hotel not found" });
 
     // ❌ Delete Cloudinary images
-    if (hotel.imagePublicIds && hotel.imagePublicIds.length > 0) {
-      for (let pid of hotel.imagePublicIds) {
-        await cloudinary.uploader.destroy(pid).catch(() => {});
+    if (hotel.images && hotel.images.length > 0) {
+      for (let img of hotel.images) {
+        await cloudinary.uploader.destroy(img.public_id).catch(() => {});
       }
     }
 

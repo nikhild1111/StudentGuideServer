@@ -48,8 +48,10 @@ const hostelRoutes = require("./routes/hostelRoutes");
 const hotel = require("./routes/hotelRoutes");
 const guideRoutes = require("./routes/guideRoutes");
 const mentorRoutes = require("./routes/mentorRoutes");
-const booksRoutes=require("./routes/booksRoutes")
+const booksRoutes=require("./routes/booksRoutes");
+const profileRoutes=require('./routes/profileRoutes');
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/user/profile",profileRoutes);
 app.use("/api/hostels", hostelRoutes);
 app.use("/api/hotel", hotel);
 app.use("/api/guide", guideRoutes); // Guide feature routes

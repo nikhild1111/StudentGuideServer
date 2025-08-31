@@ -17,17 +17,17 @@ const hostelSchema = new mongoose.Schema(
     },
     rating: {
       type: Number,
-      default: 0, // 👈 if not sent
+      default: 0,
     },
     images: [
       {
-        type: String,
-        default: [], // 👈 empty array if no images
+        url: { type: String, required: true },
+        public_id: { type: String, required: true },
       },
     ],
     video: {
       type: String,
-      default: "", // 👈 empty if not sent
+      default: "",
     },
     services: [
       {
@@ -42,15 +42,11 @@ const hostelSchema = new mongoose.Schema(
           "personal_toilet",
           "water_filter",
         ],
-        default: [], // 👈 empty if not sent
+        default: [],
       },
     ],
     address: {
-      full: {
-        type: String,
-        required: false, // 👈 make optional if you want
-        default: "",
-      },
+      full: { type: String, default: "" },
       landmark: { type: String, default: "" },
       gully: { type: String, default: "" },
       building: { type: String, default: "" },
@@ -61,7 +57,7 @@ const hostelSchema = new mongoose.Schema(
     },
     description: {
       type: String,
-      default: "No description provided", // 👈 fallback text
+      default: "No description provided",
     },
   },
   {

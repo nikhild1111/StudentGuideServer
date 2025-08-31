@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { auth } = require('../middlewares/auth');
 const upload = require('../middlewares/booksUpload');
-
+const checkOwnership=require('../middlewares/checkOwnership')
 const {
   uploadbooks,
   getbooksall,
@@ -14,7 +14,7 @@ const {
 router.post('/uploadbooks', auth, upload.array('images', 6), uploadbooks);
 router.post('/getbooksall', auth, getbooksall);
 router.get('/getbooksuser', auth, getbooksuser);
-router.put('/updatebooks', auth, upload.array('images', 6), updatebooks);
-router.delete('/deletebooks', auth, deletebooks);
+router.put('/updatebooks', auth,checkOwnership("book"), upload.array('images', 6), updatebooks);
+router.delete('/deletebooks', auth,checkOwnership("book"), deletebooks);
 
 module.exports = router;

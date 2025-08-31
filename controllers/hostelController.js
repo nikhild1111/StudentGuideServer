@@ -157,27 +157,28 @@
 // };
 
 
-
 const Hostel = require("../models/Hostel");
 const cloudinary = require("../utils/cloudinary");
 
 // 🔸 Create Hostel
 exports.createHostel = async (req, res) => {
   try {
-    const data = {};
-
-    if (req.body.name) data.name = req.body.name;
-    if (req.body.type) data.type = req.body.type;
-    if (req.body.rent) data.rent = req.body.rent;
-    if (req.body.rating) data.rating = req.body.rating;
-    if (req.body.video) data.video = req.body.video;
-    if (req.body.contact) data.contact = req.body.contact;
-    if (req.body.description) data.description = req.body.description;
+    const data = {
+      name: req.body.name,
+      type: req.body.type,
+      rent: req.body.rent,
+      rating: req.body.rating || 0,
+      video: req.body.video || "",
+      contact: req.body.contact,
+      description: req.body.description || "No description provided",
+    };
 
     // ✅ Handle Cloudinary images
     if (req.files && req.files.length > 0) {
-      data.images = req.files.map((file) => file.path); // Cloudinary URL
-      data.imagePublicIds = req.files.map((file) => file.filename); // Store public_id too
+      data.images = req.files.map((file) => ({
+        url: file.path,
+        public_id: file.filename,
+      }));
     }
 
     // ✅ Handle services
@@ -224,19 +225,20 @@ exports.updateHostel = async (req, res) => {
     }
 
     let newImages = existing.images;
-    let newPublicIds = existing.imagePublicIds || [];
 
     if (req.files && req.files.length > 0) {
       // ❌ Delete old Cloudinary images
-      if (newPublicIds.length > 0) {
-        for (let pid of newPublicIds) {
-          await cloudinary.uploader.destroy(pid).catch(() => {});
+      if (existing.images && existing.images.length > 0) {
+        for (let img of existing.images) {
+          await cloudinary.uploader.destroy(img.public_id).catch(() => {});
         }
       }
 
       // ✅ Save new ones
-      newImages = req.files.map((file) => file.path);
-      newPublicIds = req.files.map((file) => file.filename);
+      newImages = req.files.map((file) => ({
+        url: file.path,
+        public_id: file.filename,
+      }));
     }
 
     const parseIfNeeded = (field, fallback) => {
@@ -251,7 +253,6 @@ exports.updateHostel = async (req, res) => {
     const updatedFields = {
       ...req.body,
       images: newImages,
-      imagePublicIds: newPublicIds,
       address: parseIfNeeded(req.body.address, existing.address),
       services: parseIfNeeded(req.body.services, existing.services),
     };
@@ -277,18 +278,21 @@ exports.deleteHostel = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const hostel = await Hostel.findByIdAndDelete(id);
-    if (!hostel)
+    const hostel = await Hostel.findById(id);
+    if (!hostel) {
       return res
         .status(404)
         .json({ success: false, message: "Hostel not found" });
+    }
 
     // ❌ Delete images from Cloudinary
-    if (hostel.imagePublicIds && hostel.imagePublicIds.length > 0) {
-      for (let pid of hostel.imagePublicIds) {
-        await cloudinary.uploader.destroy(pid).catch(() => {});
+    if (hostel.images && hostel.images.length > 0) {
+      for (let img of hostel.images) {
+        await cloudinary.uploader.destroy(img.public_id).catch(() => {});
       }
     }
+
+    await Hostel.findByIdAndDelete(id);
 
     res.status(200).json({ success: true, message: "Hostel deleted" });
   } catch (err) {
