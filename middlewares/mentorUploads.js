@@ -4,19 +4,19 @@ const cloudinary = require("../utils/cloudinary");
 const { rawListeners } = require("../models/Mentor");
 
 const storage = new CloudinaryStorage({
- 
-  cloudinary: cloudinary,
+  cloudinary,
   params: async (req, file) => {
+    let resourceType = "image";
+    if (file.mimetype === "application/pdf") {
+      resourceType = "raw"; // force raw for PDFs
+    }
     return {
-
-   
-      folder: "mentor_uploads", // Folder in your Cloudinary
-      resource_type: "auto", // Handles both images and PDFs
-      public_id: `${Date.now()}-${file.originalname}`,
+      folder: "mentor_uploads",
+      resource_type: resourceType,
+      public_id: `${Date.now()}-${file.originalname.split(".")[0]}`,
     };
   },
 });
-
 const upload = multer({ storage });
 
 module.exports = upload;

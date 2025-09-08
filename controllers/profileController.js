@@ -1,5 +1,14 @@
 const User = require("../models/User");
 const cloudinary = require("../utils/cloudinary");
+// ------------------ DELETE USER PROFILE 
+const Mentor = require("../models/Mentor");
+const Guide = require("../models/GuideApplication");
+const Books = require("../models/Books");
+
+const mentorController = require("../controllers/mentorController");
+const guideController = require("../controllers/guideController");
+const booksController = require("../controllers/booksContoller");
+
 
 // ------------------ GET USER PROFILE ------------------
 exports.getUserProfile = async (req, res) => {
@@ -70,7 +79,7 @@ exports.updateUserProfile = async (req, res) => {
   }
 };
 
-// ------------------ DELETE USER PROFILE ------------------
+
 exports.deleteUserProfile = async (req, res) => {
   try {
     const user = await User.findById(req.user.id);
@@ -79,16 +88,36 @@ exports.deleteUserProfile = async (req, res) => {
       return res.status(404).json({ success: false, message: "User not found" });
     }
 
-    // ✅ Delete Cloudinary image
     if (user.profileImage?.public_id) {
       await cloudinary.uploader.destroy(user.profileImage.public_id);
     }
 
+    if (user.mentorProfile) {
+      await mentorController.deleteMentorById(user.mentorProfile);
+    }
+
+    if (user.guideProfile) {
+      await guideController.deleteGuideById(user.guideProfile);
+    }
+
+    if (user.booksProfile && user.booksProfile.length > 0) {
+      for (const bookId of user.booksProfile) {
+        await booksController.deleteBookById(bookId);
+      }
+    }
+
     await User.findByIdAndDelete(req.user.id);
 
-    res.status(200).json({ success: true, message: "User profile deleted successfully" });
+    res.status(200).json({
+      success: true,
+      message: "User profile and all related data deleted successfully",
+    });
   } catch (error) {
     console.error("Delete profile error:", error.message);
-    res.status(500).json({ success: false, message: "Failed to delete profile", error: error.message });
+    res.status(500).json({
+      success: false,
+      message: "Failed to delete profile",
+      error: error.message,
+    });
   }
 };

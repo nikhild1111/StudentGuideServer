@@ -12,7 +12,7 @@ const {
 } = require('../controllers/booksContoller')
 
 router.post('/uploadbooks', auth, upload.array('images', 6), uploadbooks);
-router.post('/getbooksall', auth, getbooksall);
+router.post('/getbooksall', getbooksall);
 router.get('/getbooksuser', auth, getbooksuser);
 router.put('/updatebooks', auth,checkOwnership("book"), upload.array('images', 6), updatebooks);
 router.delete('/deletebooks', auth,checkOwnership("book"), deletebooks);

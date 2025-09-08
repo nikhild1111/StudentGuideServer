@@ -40,7 +40,7 @@ const router = express.Router();
 router.post("/apply-guide", auth, guideUpload.single("image"), applyForGuide);
 
 // Admin: View all guides
-router.post("/admin/guides", auth,  getAllGuides);
+router.post("/admin/guides",   getAllGuides);
 
 // Admin: Approve guide
 router.put("/admin/approve-guide/:id", auth, isAdmin, approveGuide);

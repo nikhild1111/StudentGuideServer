@@ -22,7 +22,7 @@ const { auth ,isAdmin} = require("../middlewares/auth");
 const hotelUpload = makeUploader("hoteluploads");
 
 router.post("/",auth,isAdmin, hotelUpload.array("images", 10), hotelController.createHotel);
-router.post("/list", auth,hotelController.getAllHotels);
+router.post("/list",hotelController.getAllHotels);
 router.get("/:id",auth, hotelController.getHotelById);
 router.put("/:id",auth,isAdmin, hotelUpload.array("images", 10), hotelController.updateHotel);
 router.delete("/:id",auth,isAdmin, hotelController.deleteHotel);
